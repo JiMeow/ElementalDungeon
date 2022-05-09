@@ -7,11 +7,11 @@ from tile import Tile
 
 
 class Map():
-    def __init__(self, tilelist, win, player, deltatime):
+    def __init__(self, tilelist, win, player, serverstarttime):
         self.player = player
         self.win = win
         self.tile = tilelist
-        self.monster = Monster(time.time()-deltatime)
+        self.monster = Monster(time.time(), serverstarttime)
         for layer in range(2):
             for row in range(len(tilelist[layer])):
                 for col in range(len(tilelist[layer][0])):

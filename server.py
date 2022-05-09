@@ -17,6 +17,7 @@ except socket.error as e:
     str(e)
 
 s.listen(20)
+serverstarttime = time.time()
 print("Waiting for a connection, Server Started")
 maxPlayers = 10
 
@@ -25,7 +26,7 @@ for i in range(maxPlayers):
     players.append(Player(i+1, 30, 30, 50, 34, (0, 0, 0), f"Player{i+1}"))
 
 monster = []
-monster.append(Monster(time.time()))
+monster.append(Monster(time.time(), serverstarttime))
 
 currentPlayer = {}
 
@@ -50,16 +51,14 @@ def threaded_client(conn, player):
             if data.atk != 0:
                 if data.atk == 9999:  # player hp - 1
                     monster.pop(0)
-                    monster.append(Monster(time.time()))
+                    monster.append(Monster(time.time(), serverstarttime))
                 elif monster[0].weakskill[0] == data.atkelement:
                     monster[0].weakskill.pop(0)
                     data.atksuccess = 45
                     attacksuccess = 45
                     if len(monster[0].weakskill) == 0:
                         monster.pop(0)
-                        monster.append(Monster(time.time()))
-                else:
-                    print("Invoke Failed")
+                        monster.append(Monster(time.time(), serverstarttime))
                 data.atk = 0
             players[player] = data
             if not data:

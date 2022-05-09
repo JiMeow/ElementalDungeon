@@ -12,10 +12,6 @@ class checkDamage():
         self.map = map
         self.monster = map.monster
         self.monsterAttackPlayer()
-        self.playerAttackMonster()
-        
-    def playerAttackMonster(self):
-        pass
 
     def monsterAttackPlayer(self):
         if scale(50) > self.monster.tempx+scale(150):

@@ -19,16 +19,18 @@ class Monster():
         pygame.image.load(f"photo/forestelement.png"), (scale(20), scale(20)))
     elementimg["forest"] = img
 
-    def __init__(self, time):
+    def __init__(self, times, serverstarttime):
         self.atk = random.randint(1, 10)
         self.hp = random.randint(1, 10)
         self.speed = scale(random.randint(2, 4))
+        self.time = times
+        self.nowtime = times-serverstarttime
+        self.nowdifficulty = int(self.nowtime//20) + 1
         self.weakskill = [
-            [Monster.element[random.randint(0, 2)] for i in range(3)]for i in range(5)]
+            [Monster.element[random.randint(0, 2)] for i in range(3)]for i in range(self.nowdifficulty)]
         self.x = width*1.5
         self.y = height//2
         self.tempx = self.x
-        self.time = time
 
     def update(self, deltatime):
         self.tempx = self.x - self.speed * \
@@ -43,12 +45,3 @@ class Monster():
             for index in range(len(self.weakskill[row])):
                 win.blit(Monster.elementimg[self.weakskill[row][index]],
                          (self.tempx + scale(40+25*index), self.y-scale(40*row+40), scale(20), scale(20)))
-
-    # def reset(self):
-    #     self.atk = random.randint(1, 10)
-    #     self.hp = random.randint(1, 10)
-    #     self.speed = random.randint(2, 4)
-    #     self.weakskill = [
-    #         Monster.element[random.randint(0, 2)] for i in range(3)]
-    #     self.x = width*1.5
-    #     self.y = height//2

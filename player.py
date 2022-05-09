@@ -25,11 +25,15 @@ def loadElementimg():
     return elementimg
 
 
+def loadStarimg():
+    return pygame.transform.scale(
+        pygame.image.load(f"photo/star.png"), (scale(30), scale(30)))
+
+
 class Player():
     playerimg = loadPlayerimg()
     elementimg = loadElementimg()
-    starimg = pygame.transform.scale(
-        pygame.image.load(f"photo/star.png"), (scale(30), scale(30)))
+    starimg = loadStarimg()
 
     def __init__(self, id, x, y, width, height, color, name):
         self.id = id
@@ -50,25 +54,15 @@ class Player():
         win.blit(Player.playerimg[self.id-1],
                  (scale(50), scale(800-100*self.id), scale(50), scale(34)))
         self.drawelement(win)
+        self.drawname(win)
         if self.atksuccess != 0:
             self.drawatksuccess(win)
             self.atksuccess -= 1
 
     def drawname(self, win):
-        """
-        draw player name at stage by rect
-
-        Args:
-            win (pygame.display): pygame window
-            stage (int): stage of game. Defaults to 0.
-        """
         font = pygame.font.Font(None, 20)
         text = font.render(str(self.name), True, "black")
-        rect = text.get_rect()
-        rect.center = (self.x, self.y)
-        rect.x += self.width//2
-        rect.y += self.height//2
-        win.blit(text, rect)
+        win.blit(text, (scale(52), scale(800-100*self.id+40)))
 
     def drawelement(self, win):
         for index in range(len(self.elementSlot)):
@@ -76,15 +70,10 @@ class Player():
                      (scale(40+25*index), scale(800-self.height-100*self.id), scale(20), scale(20)))
 
     def drawatksuccess(self, win):
-        win.blit(Player.starimg, (scale(100), scale(
+        win.blit(Player.starimg, (scale(110), scale(
             800-100*self.id), scale(20), scale(20)))
 
     def invokeskill(self, skill):
-        """
-        control player move by keyboard then change speed of player
-        if player on slab and press key 'down' or 's' then drop from slab 
-        can not move is player not in frame of screen
-        """
         if skill == pygame.K_r:
             if len(self.elementSlot) == 3:
                 self.atkelement = list(self.elementSlot)
@@ -101,17 +90,6 @@ class Player():
             self.elementSlot.append("forest")
 
     def update(self, dt=1/60):
-        """
-        update player position by speed and delta time then 
-        set player (x,y) position to collision information
-        then check collision with all obstacle in map 
-        and update information of player
-
-        Args:
-            dt (float, float): delta time check for lag. Defaults to 1/60.
-            collision (Collision, Nonce): collision information for check collision. Defaults to None.
-        """
-        # print(f"{self.x}+{self.vel * 60}", end=":")
         self.x += self.vel * 60 * dt
         if self.x > width*2:
             self.x -= width - scale(48)

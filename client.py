@@ -31,7 +31,7 @@ class Game():
         self.tempmonster = list(self.monster)
         self.tempplayeratksuccess = [0]
 
-        self.map = Map(readmap(), self.win, self.player, self.deltatime)
+        self.map = Map(readmap(), self.win, self.player, self.servertime)
         self.layout = Layout(self.win, self.clock)
 
         self.thread = Thread(target=getDataFromServer, args=(
