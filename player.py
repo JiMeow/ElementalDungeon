@@ -28,6 +28,8 @@ def loadElementimg():
 class Player():
     playerimg = loadPlayerimg()
     elementimg = loadElementimg()
+    starimg = pygame.transform.scale(
+        pygame.image.load(f"photo/star.png"), (scale(30), scale(30)))
 
     def __init__(self, id, x, y, width, height, color, name):
         self.id = id
@@ -40,6 +42,7 @@ class Player():
         self.rect = pygame.Rect(x, y, width, height)
         self.vel = scale(1.5)
         self.elementSlot = []
+        self.atksuccess = 0
         self.atk = 0
 
     def draw(self, win):
@@ -47,8 +50,9 @@ class Player():
         win.blit(Player.playerimg[self.id-1],
                  (scale(50), scale(800-100*self.id), scale(50), scale(34)))
         self.drawelement(win)
-        # pygame.draw.rect(win, self.color, pygame.Rect(
-        #     self.rect.x-width, self.rect.y, self.rect.width, self.rect.height))
+        if self.atksuccess != 0:
+            self.drawatksuccess(win)
+            self.atksuccess -= 1
 
     def drawname(self, win):
         """
@@ -70,6 +74,10 @@ class Player():
         for index in range(len(self.elementSlot)):
             win.blit(Player.elementimg[self.elementSlot[index]],
                      (scale(40+25*index), scale(800-self.height-100*self.id), scale(20), scale(20)))
+
+    def drawatksuccess(self, win):
+        win.blit(Player.starimg, (scale(100), scale(
+            800-100*self.id), scale(20), scale(20)))
 
     def invokeskill(self, skill):
         """

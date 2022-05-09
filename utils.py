@@ -1,4 +1,4 @@
-def getDataFromServer(network, player, allp=[], status={}, monster=[]):
+def getDataFromServer(network, player, allp=[], status={}, monster=[], playeratksuccess=[]):
     while(len(allp) != 0):
         allp.pop(0)
     data = network.send(player)
@@ -8,10 +8,11 @@ def getDataFromServer(network, player, allp=[], status={}, monster=[]):
     while(len(monster) != 0):
         monster.pop(0)
     monster.append(data["monster"])
+    playeratksuccess.append(data["playeratksuccess"])
     return allp, status, monster
 
 
-def setdatafromserver(allp, status, monster, tempallp, tempstatus, tempmonster):
+def setdatafromserver(allp, status, monster, player, tempallp, tempstatus, tempmonster, playeratksuccess):
     while(len(allp) != 0):
         allp.pop(0)
     for i in tempallp:
@@ -21,6 +22,8 @@ def setdatafromserver(allp, status, monster, tempallp, tempstatus, tempmonster):
     while(len(monster) != 0):
         monster.pop(0)
     monster.append(tempmonster[0])
+    player.atksuccess = max(playeratksuccess[0], player.atksuccess)
+    # print(player.attacksuccess)
 
 
 def redrawWindow(layout, map,  player, allp, status):

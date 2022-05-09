@@ -30,8 +30,9 @@ class Monster():
         self.tempx = self.x
         self.time = time
 
-    def update(self):
-        self.tempx = self.x - self.speed * (time.time()-self.time) * 60
+    def update(self, deltatime):
+        self.tempx = self.x - self.speed * \
+            (time.time()-deltatime-self.time) * 60
 
     def draw(self, win):
         win.blit(Monster.monsterimg, (self.tempx, self.y))
@@ -43,11 +44,11 @@ class Monster():
                 win.blit(Monster.elementimg[self.weakskill[row][index]],
                          (self.tempx + scale(40+25*index), self.y-scale(40*row+40), scale(20), scale(20)))
 
-    def reset(self):
-        self.atk = random.randint(1, 10)
-        self.hp = random.randint(1, 10)
-        self.speed = random.randint(2, 4)
-        self.weakskill = [
-            Monster.element[random.randint(0, 2)] for i in range(3)]
-        self.x = width*1.5
-        self.y = height//2
+    # def reset(self):
+    #     self.atk = random.randint(1, 10)
+    #     self.hp = random.randint(1, 10)
+    #     self.speed = random.randint(2, 4)
+    #     self.weakskill = [
+    #         Monster.element[random.randint(0, 2)] for i in range(3)]
+    #     self.x = width*1.5
+    #     self.y = height//2

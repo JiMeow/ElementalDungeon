@@ -17,7 +17,8 @@ class Game():
         pygame.init()
 
         self.network = Network()
-        self.player = self.network.getInitData()
+        self.player, self.servertime = self.network.getInitData()
+        self.deltatime = time.time()-self.servertime
         self.clock = pygame.time.Clock()
 
         self.run = True
@@ -28,8 +29,9 @@ class Game():
         self.tempallp = list(self.allp)
         self.tempstatus = dict(self.status)
         self.tempmonster = list(self.monster)
+        self.tempplayeratksuccess = [0]
 
-        self.map = Map(readmap(), self.win, self.player)
+        self.map = Map(readmap(), self.win, self.player, self.deltatime)
         self.layout = Layout(self.win, self.clock)
 
         self.thread = Thread(target=getDataFromServer, args=(
@@ -45,10 +47,11 @@ class Game():
             self.beforetime = time.time()
 
             if not self.thread.is_alive():
-                setdatafromserver(self.allp, self.status, self.monster,
-                                  self.tempallp, self.tempstatus, self.tempmonster)
+                setdatafromserver(self.allp, self.status, self.monster, self.player,
+                                  self.tempallp, self.tempstatus, self.tempmonster, self.tempplayeratksuccess)
+                self.tempplayeratksuccess = []
                 self.thread = Thread(target=getDataFromServer, args=(
-                    self.network, self.player, self.tempallp, self.tempstatus, self.tempmonster))
+                    self.network, self.player, self.tempallp, self.tempstatus, self.tempmonster, self.tempplayeratksuccess))
                 self.thread.start()
                 self.player.atk = 0
 
@@ -70,7 +73,7 @@ class Game():
             if not self.run:
                 break
 
-            self.monster[0].update()
+            self.monster[0].update(self.deltatime)
             if self.monster[0].tempx > width:
                 self.player.update(dt)
 
@@ -78,10 +81,11 @@ class Game():
             self.checkDamage.update(self.map)
 
             if not self.thread.is_alive():
-                setdatafromserver(self.allp, self.status, self.monster,
-                                  self.tempallp, self.tempstatus, self.tempmonster)
+                setdatafromserver(self.allp, self.status, self.monster, self.player,
+                                  self.tempallp, self.tempstatus, self.tempmonster, self.tempplayeratksuccess)
+                self.tempplayeratksuccess = []
                 self.thread = Thread(target=getDataFromServer, args=(
-                    self.network, self.player, self.tempallp, self.tempstatus, self.tempmonster))
+                    self.network, self.player, self.tempallp, self.tempstatus, self.tempmonster, self.tempplayeratksuccess))
                 self.thread.start()
                 self.player.atk = 0
 

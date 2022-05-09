@@ -40,32 +40,38 @@ def threaded_client(conn, player):
     """
     print(player, "connected")
     global currentPlayer
-    conn.send(pickle.dumps((players[player])))
+    conn.send(pickle.dumps((players[player], time.time())))
 
     reply = ""
     while True:
+        attacksuccess = 0
         try:
             data = pickle.loads(conn.recv(65536))
             if data.atk != 0:
-                if data.atk == 9999:
+                if data.atk == 9999:  # player hp - 1
                     monster.pop(0)
                     monster.append(Monster(time.time()))
                 elif monster[0].weakskill[0] == data.atkelement:
                     monster[0].weakskill.pop(0)
+                    data.atksuccess = 45
+                    attacksuccess = 45
                     if len(monster[0].weakskill) == 0:
                         monster.pop(0)
                         monster.append(Monster(time.time()))
-                    data.atk = 0
                 else:
                     print("Invoke Failed")
+                data.atk = 0
             players[player] = data
             if not data:
                 print("Disconnected")
                 break
             else:
-                reply = {"players": players,
-                         "status": currentPlayer,
-                         "monster": monster[0]}
+                reply = {
+                    "playeratksuccess": attacksuccess,
+                    "players": players,
+                    "status": currentPlayer,
+                    "monster": monster[0]
+                }
             conn.sendall(pickle.dumps(reply))
         except Exception as e:
             print(e)
