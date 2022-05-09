@@ -46,10 +46,15 @@ def threaded_client(conn, player):
     while True:
         try:
             data = pickle.loads(conn.recv(65536))
-            if data.atk == 1:
-                if monster[0].weakskill == data.atkelement:
+            if data.atk != 0:
+                if data.atk == 9999:
                     monster.pop(0)
                     monster.append(Monster(time.time()))
+                elif monster[0].weakskill[0] == data.atkelement:
+                    monster[0].weakskill.pop(0)
+                    if len(monster[0].weakskill) == 0:
+                        monster.pop(0)
+                        monster.append(Monster(time.time()))
                     data.atk = 0
                 else:
                     print("Invoke Failed")

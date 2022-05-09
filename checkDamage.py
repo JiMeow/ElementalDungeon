@@ -19,5 +19,5 @@ class checkDamage():
 
     def monsterAttackPlayer(self):
         if scale(50) > self.monster.tempx+scale(150):
-            self.player.atk = 1
+            self.player.atk = 9999
             

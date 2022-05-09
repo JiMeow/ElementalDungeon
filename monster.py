@@ -24,7 +24,7 @@ class Monster():
         self.hp = random.randint(1, 10)
         self.speed = scale(random.randint(2, 4))
         self.weakskill = [
-            Monster.element[random.randint(0, 2)] for i in range(3)]
+            [Monster.element[random.randint(0, 2)] for i in range(3)]for i in range(5)]
         self.x = width*1.5
         self.y = height//2
         self.tempx = self.x
@@ -38,9 +38,10 @@ class Monster():
         self.drawweak(win)
 
     def drawweak(self, win):
-        for index in range(len(self.weakskill)):
-            win.blit(Monster.elementimg[self.weakskill[index]],
-                     (self.tempx + scale(40+25*index), self.y-scale(40), scale(20), scale(20)))
+        for row in range(len(self.weakskill)):
+            for index in range(len(self.weakskill[row])):
+                win.blit(Monster.elementimg[self.weakskill[row][index]],
+                         (self.tempx + scale(40+25*index), self.y-scale(40*row+40), scale(20), scale(20)))
 
     def reset(self):
         self.atk = random.randint(1, 10)
