@@ -23,7 +23,7 @@ class Monster():
         self.atk = random.randint(1, 10)
         self.hp = random.randint(1, 10)
         self.id = id
-        self.speed = scale(random.randint(2, 4))
+        self.speed = scale(random.randint(2, 3))
         self.time = times
         self.nowtime = times-serverstarttime
         self.nowdifficulty = int(self.nowtime//30) + 1
