@@ -14,6 +14,9 @@ def loadimg():
         pygame.image.load(f"photo/forestelement.png"), (scale(30), scale(30)))
     img["forest"] = imgtemp
     imgtemp = pygame.transform.scale(
+        pygame.image.load(f"photo/invoke.png"), (scale(30), scale(30)))
+    img["invoke"] = imgtemp
+    imgtemp = pygame.transform.scale(
         pygame.image.load(f"photo/bookskill.png"), (scale(250), scale(180)))
     img["book"] = imgtemp
 
@@ -85,4 +88,11 @@ class Layout():
                 f": e", True, "Black")
             self.win.blit(self.textwater,
                           self.textwater.get_rect(topleft=(width//2+scale(50), height-scale(195))))
+
+            self.win.blit(
+                Layout.img["invoke"], (width//2+scale(15), height-scale(150), scale(30), scale(30)))
+            self.yexyinvoke = pygame.font.Font(None, 30).render(
+                f": r", True, "Black")
+            self.win.blit(self.yexyinvoke,
+                          self.yexyinvoke.get_rect(topleft=(width//2+scale(50), height-scale(145))))
         pygame.display.update()
