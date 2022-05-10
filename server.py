@@ -61,14 +61,13 @@ def threaded_client(conn, player):
                     monster.append(
                         Monster(time.time(), serverstarttime, monstercnt))
                 elif monster[0].weakskill[0] == data.atkelement:
+                    if data.name not in scoreboard:
+                        scoreboard[data.name] = 0
+                    scoreboard[data.name] += 1
                     monster[0].weakskill.pop(0)
                     data.atksuccess = 45
                     attacksuccess = 45
                     if len(monster[0].weakskill) == 0:
-                        if data.name not in scoreboard:
-                            print("set 0")
-                            scoreboard[data.name] = 0
-                        scoreboard[data.name] += 1
                         monster.pop(0)
                         monstercnt += 1
                         monster.append(
