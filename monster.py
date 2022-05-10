@@ -30,7 +30,7 @@ class Monster():
         self.weakskill = [
             [Monster.element[random.randint(0, 2)] for i in range(3)]for i in range(self.nowdifficulty)]
         self.x = width*1.5
-        self.y = height//2-150
+        self.y = height//2-20
         self.tempx = self.x
         self.tempy = self.y
 
