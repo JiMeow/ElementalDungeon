@@ -20,7 +20,6 @@ s.listen(20)
 monstercnt = 1
 serverstarttime = time.time()
 print("Waiting for a connection, Server Started")
-maxPlayers = 10
 
 players = []
 for i in range(maxPlayers):

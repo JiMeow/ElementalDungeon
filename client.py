@@ -31,7 +31,6 @@ class Game():
         self.tempmonster = list(self.monster)
         self.tempplayerreturn = {"playeratksuccess": 0,
                                  "timeinvokedelay": 0}
-
         self.map = Map(readmap(), self.win, self.player)
         self.layout = Layout(self.win, self.clock)
 

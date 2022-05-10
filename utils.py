@@ -1,9 +1,12 @@
+from setting import *
+
+
 def getDataFromServer(network, player, allp=[], status={}, monster=[], playerreturn={}):
     while(len(allp) != 0):
         allp.pop(0)
     data = network.send(player)
     allp += data["players"]
-    for i in range(10):
+    for i in range(maxPlayers):
         status[i] = data["status"][i]
     while(len(monster) != 0):
         monster.pop(0)
