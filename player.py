@@ -83,11 +83,11 @@ class Player():
         if len(self.elementSlot) == 3:
             self.elementSlot.pop(0)
         if skill == pygame.K_q:
-            self.elementSlot.append("water")
-        if skill == pygame.K_w:
             self.elementSlot.append("fire")
-        if skill == pygame.K_e:
+        if skill == pygame.K_w:
             self.elementSlot.append("forest")
+        if skill == pygame.K_e:
+            self.elementSlot.append("water")
 
     def update(self, dt=1/60):
         self.x += self.vel * 60 * dt

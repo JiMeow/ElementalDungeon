@@ -5,7 +5,7 @@ import time
 
 
 class Monster():
-    element = ["fire", "water", "forest"]
+    element = ["fire", "forest", "water" ]
     monsterimg = pygame.transform.scale(
         pygame.image.load("photo/monster.png"), (scale(158), scale(108)))
     elementimg = {}
