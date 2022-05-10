@@ -29,7 +29,8 @@ class Game():
         self.tempallp = list(self.allp)
         self.tempstatus = dict(self.status)
         self.tempmonster = list(self.monster)
-        self.tempplayeratksuccess = [0]
+        self.tempplayerreturn = {"playeratksuccess": 0,
+                                 "timeinvokedelay": 0}
 
         self.map = Map(readmap(), self.win, self.player)
         self.layout = Layout(self.win, self.clock)
@@ -48,10 +49,10 @@ class Game():
 
             if not self.thread.is_alive():
                 setdatafromserver(self.allp, self.status, self.monster, self.player,
-                                  self.tempallp, self.tempstatus, self.tempmonster, self.tempplayeratksuccess)
-                self.tempplayeratksuccess = []
+                                  self.tempallp, self.tempstatus, self.tempmonster, self.tempplayerreturn)
+                self.tempplayerreturn = {}
                 self.thread = Thread(target=getDataFromServer, args=(
-                    self.network, self.player, self.tempallp, self.tempstatus, self.tempmonster, self.tempplayeratksuccess))
+                    self.network, self.player, self.tempallp, self.tempstatus, self.tempmonster, self.tempplayerreturn))
                 self.thread.start()
                 self.player.atk = 0
 
@@ -82,10 +83,10 @@ class Game():
 
             if not self.thread.is_alive():
                 setdatafromserver(self.allp, self.status, self.monster, self.player,
-                                  self.tempallp, self.tempstatus, self.tempmonster, self.tempplayeratksuccess)
-                self.tempplayeratksuccess = []
+                                  self.tempallp, self.tempstatus, self.tempmonster, self.tempplayerreturn)
+                self.tempplayerreturn = []
                 self.thread = Thread(target=getDataFromServer, args=(
-                    self.network, self.player, self.tempallp, self.tempstatus, self.tempmonster, self.tempplayeratksuccess))
+                    self.network, self.player, self.tempallp, self.tempstatus, self.tempmonster, self.tempplayerreturn))
                 self.thread.start()
                 self.player.atk = 0
 

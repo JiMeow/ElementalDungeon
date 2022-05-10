@@ -47,6 +47,7 @@ class Player():
         self.vel = scale(1.5)
         self.elementSlot = []
         self.atksuccess = 0
+        self.timeinvokedelay = 0
         self.atk = 0
 
     def draw(self, win):
@@ -58,6 +59,8 @@ class Player():
         if self.atksuccess != 0:
             self.drawatksuccess(win)
             self.atksuccess -= 1
+        if self.timeinvokedelay != 0:
+            self.timeinvokedelay -= 1
 
     def drawname(self, win):
         font = pygame.font.Font(None, 20)
@@ -75,6 +78,8 @@ class Player():
 
     def invokeskill(self, skill):
         if skill == pygame.K_r:
+            if self.timeinvokedelay == 0:
+                return
             if len(self.elementSlot) == 3:
                 self.atkelement = list(self.elementSlot)
                 self.elementSlot = []

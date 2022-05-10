@@ -49,6 +49,7 @@ def threaded_client(conn, player):
     reply = ""
     while True:
         attacksuccess = 0
+        timeinvokedelay = 0
         try:
             data = pickle.loads(conn.recv(65536))
             if data.atk != 0:
@@ -67,6 +68,11 @@ def threaded_client(conn, player):
                         monstercnt += 1
                         monster.append(
                             Monster(time.time(), serverstarttime, monstercnt))
+                else:
+                    data.timeinvokedelay = 45
+                    timeinvokedelay = 45
+                    print("Invoke Fail")
+
                 data.atk = 0
             players[player] = data
             if not data:
@@ -74,7 +80,10 @@ def threaded_client(conn, player):
                 break
             else:
                 reply = {
-                    "playeratksuccess": attacksuccess,
+                    "playerreturn": {
+                        "playeratksuccess": attacksuccess,
+                        "timeinvokedelay": timeinvokedelay,
+                    },
                     "players": players,
                     "status": currentPlayer,
                     "monster": monster[0]

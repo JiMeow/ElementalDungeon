@@ -1,4 +1,4 @@
-def getDataFromServer(network, player, allp=[], status={}, monster=[], playeratksuccess=[]):
+def getDataFromServer(network, player, allp=[], status={}, monster=[], playerreturn={}):
     while(len(allp) != 0):
         allp.pop(0)
     data = network.send(player)
@@ -8,11 +8,12 @@ def getDataFromServer(network, player, allp=[], status={}, monster=[], playeratk
     while(len(monster) != 0):
         monster.pop(0)
     monster.append(data["monster"])
-    playeratksuccess.append(data["playeratksuccess"])
+    playerreturn["playeratksuccess"] = data["playerreturn"]["playeratksuccess"]
+    playerreturn["timeinvokedelay"] = data["playerreturn"]["timeinvokedelay"]
     return allp, status, monster
 
 
-def setdatafromserver(allp, status, monster, player, tempallp, tempstatus, tempmonster, playeratksuccess):
+def setdatafromserver(allp, status, monster, player, tempallp, tempstatus, tempmonster, playerreturn):
     while(len(allp) != 0):
         allp.pop(0)
     for i in tempallp:
@@ -22,7 +23,10 @@ def setdatafromserver(allp, status, monster, player, tempallp, tempstatus, tempm
     while(len(monster) != 0):
         monster.pop(0)
     monster.append(tempmonster[0])
-    player.atksuccess = max(playeratksuccess[0], player.atksuccess)
+    player.atksuccess = max(
+        playerreturn["playeratksuccess"], player.atksuccess)
+    player.timeinvokedelay = max(
+        playerreturn["timeinvokedelay"], player.timeinvokedelay)
     # print(player.attacksuccess)
 
 
