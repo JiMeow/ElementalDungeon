@@ -63,7 +63,10 @@ class Game():
                     self.network.disconnect()
                     break
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_q or event.key == pygame.K_w or event.key == pygame.K_e or event.key == pygame.K_r:
+                    if event.key == pygame.K_q or event.key == pygame.K_w or event.key == pygame.K_e or\
+                            event.key == pygame.K_r or event.key == pygame.K_j or event.key == pygame.K_k or\
+                            event.key == pygame.K_l or event.key == pygame.K_SPACE or event.key == pygame.K_KP_ENTER or\
+                            event.key == pygame.K_KP_1 or event.key == pygame.K_KP_2 or event.key == pygame.K_KP_3:
                         self.player.invokeskill(event.key)
                     if event.key == pygame.K_ESCAPE:
                         self.run = False

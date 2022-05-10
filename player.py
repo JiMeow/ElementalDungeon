@@ -77,7 +77,7 @@ class Player():
             800-100*self.id), scale(20), scale(20)))
 
     def invokeskill(self, skill):
-        if skill == pygame.K_r:
+        if skill == pygame.K_r or skill == pygame.K_SPACE or skill == pygame.K_KP_ENTER:
             if self.timeinvokedelay != 0:
                 return
             if len(self.elementSlot) == 3:
@@ -87,11 +87,11 @@ class Player():
 
         if len(self.elementSlot) == 3:
             self.elementSlot.pop(0)
-        if skill == pygame.K_q:
+        if skill == pygame.K_q or skill == pygame.K_j or skill == pygame.K_KP_1:
             self.elementSlot.append("fire")
-        if skill == pygame.K_w:
+        if skill == pygame.K_w or skill == pygame.K_k or skill == pygame.K_KP_2:
             self.elementSlot.append("forest")
-        if skill == pygame.K_e:
+        if skill == pygame.K_e or skill == pygame.K_l or skill == pygame.K_KP_3:
             self.elementSlot.append("water")
 
     def update(self, dt=1/60):
