@@ -84,7 +84,7 @@ class Game():
             if not self.thread.is_alive():
                 setdatafromserver(self.allp, self.status, self.monster, self.player,
                                   self.tempallp, self.tempstatus, self.tempmonster, self.tempplayerreturn)
-                self.tempplayerreturn = []
+                self.tempplayerreturn = {}
                 self.thread = Thread(target=getDataFromServer, args=(
                     self.network, self.player, self.tempallp, self.tempstatus, self.tempmonster, self.tempplayerreturn))
                 self.thread.start()
