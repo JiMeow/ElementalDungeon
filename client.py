@@ -30,7 +30,10 @@ class Game():
         self.tempstatus = dict(self.status)
         self.tempmonster = list(self.monster)
         self.tempplayerreturn = {"playeratksuccess": 0,
-                                 "timeinvokedelay": 0}
+                                 "timeinvokedelay": 0,
+                                 "scoreboard": {}, }
+        self.scoreboard = {}
+
         self.map = Map(readmap(), self.win, self.player)
         self.layout = Layout(self.win, self.clock)
 
@@ -47,7 +50,7 @@ class Game():
             self.beforetime = time.time()
 
             if not self.thread.is_alive():
-                setdatafromserver(self.allp, self.status, self.monster, self.player,
+                setdatafromserver(self.allp, self.status, self.monster, self.player, self.scoreboard,
                                   self.tempallp, self.tempstatus, self.tempmonster, self.tempplayerreturn)
                 self.tempplayerreturn = {}
                 self.thread = Thread(target=getDataFromServer, args=(
@@ -84,16 +87,15 @@ class Game():
             self.checkDamage.update(self.map)
 
             if not self.thread.is_alive():
-                setdatafromserver(self.allp, self.status, self.monster, self.player,
+                setdatafromserver(self.allp, self.status, self.monster, self.player, self.scoreboard,
                                   self.tempallp, self.tempstatus, self.tempmonster, self.tempplayerreturn)
                 self.tempplayerreturn = {}
                 self.thread = Thread(target=getDataFromServer, args=(
                     self.network, self.player, self.tempallp, self.tempstatus, self.tempmonster, self.tempplayerreturn))
                 self.thread.start()
                 self.player.atk = 0
-
             redrawWindow(self.layout, self.map,  self.player,
-                         self.allp, self.status, self.monster[0])
+                         self.allp, self.status, self.monster[0], self.scoreboard)
             self.frame += 1
 
 

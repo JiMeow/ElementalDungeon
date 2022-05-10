@@ -28,6 +28,7 @@ monster = []
 monster.append(Monster(time.time(), serverstarttime, monstercnt))
 
 currentPlayer = {}
+scoreboard = {}
 
 
 def threaded_client(conn, player):
@@ -40,6 +41,7 @@ def threaded_client(conn, player):
     """
     print(player, "connected")
     global currentPlayer
+    global scoreboard
     global serverstarttime
     global monstercnt
     conn.send(pickle.dumps((players[player], time.time())))
@@ -53,8 +55,9 @@ def threaded_client(conn, player):
             if data.atk != 0:
                 if data.atk == 9999:  # player hp - 1
                     monster.pop(0)
-                    monstercnt = 1
                     serverstarttime = time.time()
+                    monstercnt = 1
+                    scoreboard = {}
                     monster.append(
                         Monster(time.time(), serverstarttime, monstercnt))
                 elif monster[0].weakskill[0] == data.atkelement:
@@ -62,6 +65,10 @@ def threaded_client(conn, player):
                     data.atksuccess = 45
                     attacksuccess = 45
                     if len(monster[0].weakskill) == 0:
+                        if data.name not in scoreboard:
+                            print("set 0")
+                            scoreboard[data.name] = 0
+                        scoreboard[data.name] += 1
                         monster.pop(0)
                         monstercnt += 1
                         monster.append(
@@ -81,6 +88,7 @@ def threaded_client(conn, player):
                     "playerreturn": {
                         "playeratksuccess": attacksuccess,
                         "timeinvokedelay": timeinvokedelay,
+                        "scoreboard": scoreboard
                     },
                     "players": players,
                     "status": currentPlayer,
@@ -94,6 +102,7 @@ def threaded_client(conn, player):
     print(player, "disconnected")
 
     currentPlayer[player] = 0
+    scoreboard.pop(players[player].name)
     players[player].x = 30
     players[player].y = -100
     players[player].rect = pygame.Rect(30, -100, 54, 30)
