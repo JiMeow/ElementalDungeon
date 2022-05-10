@@ -5,9 +5,14 @@ import time
 
 
 class Monster():
+
+    monsterimg = []
+    monsterimg.append(pygame.transform.scale(
+        pygame.image.load("photo/monster1.png"), (scale(158), scale(108))))
+    monsterimg.append(pygame.transform.scale(
+        pygame.image.load("photo/monster2.png"), (scale(158), scale(130))))
+
     element = ["fire", "forest", "water"]
-    monsterimg = pygame.transform.scale(
-        pygame.image.load("photo/monster.png"), (scale(158), scale(108)))
     elementimg = {}
     img = pygame.transform.scale(
         pygame.image.load(f"photo/fireelement.png"), (scale(20), scale(20)))
@@ -23,6 +28,7 @@ class Monster():
         self.atk = random.randint(1, 10)
         self.hp = random.randint(1, 10)
         self.id = id
+        self.imgindex = random.randint(0, 1)
         self.speed = random.randint(2, 3)
         self.time = times
         self.nowtime = times-serverstarttime
@@ -40,7 +46,7 @@ class Monster():
         self.tempy = scale(self.y)
 
     def draw(self, win):
-        win.blit(Monster.monsterimg, (self.tempx, self.tempy))
+        win.blit(Monster.monsterimg[self.imgindex], (self.tempx, self.tempy))
         self.drawweak(win)
 
     def drawweak(self, win):
