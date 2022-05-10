@@ -78,7 +78,7 @@ class Player():
 
     def invokeskill(self, skill):
         if skill == pygame.K_r:
-            if self.timeinvokedelay == 0:
+            if self.timeinvokedelay != 0:
                 return
             if len(self.elementSlot) == 3:
                 self.atkelement = list(self.elementSlot)
