@@ -31,7 +31,7 @@ class Game():
         self.tempmonster = list(self.monster)
         self.tempplayeratksuccess = [0]
 
-        self.map = Map(readmap(), self.win, self.player, self.servertime)
+        self.map = Map(readmap(), self.win, self.player)
         self.layout = Layout(self.win, self.clock)
 
         self.thread = Thread(target=getDataFromServer, args=(
@@ -90,7 +90,7 @@ class Game():
                 self.player.atk = 0
 
             redrawWindow(self.layout, self.map,  self.player,
-                         self.allp, self.status)
+                         self.allp, self.status, self.monster[0])
             self.frame += 1
 
 

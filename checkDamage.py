@@ -5,7 +5,7 @@ class checkDamage():
     def __init__(self, map):
         self.player = map.player
         self.map = map
-        self.monster = map.monster
+        # self.monster = map.monster
 
     def update(self, map):
         self.player = map.player

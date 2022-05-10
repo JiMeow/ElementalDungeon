@@ -26,9 +26,10 @@ def setdatafromserver(allp, status, monster, player, tempallp, tempstatus, tempm
     # print(player.attacksuccess)
 
 
-def redrawWindow(layout, map,  player, allp, status):
+def redrawWindow(layout, map,  player, allp, status, monster):
     layout.updatemap(map)
     layout.updateplayer(player)
     layout.updateallplayer(allp)
     layout.updatestatus(status)
+    layout.updatemonster(monster)
     layout.draw()

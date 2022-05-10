@@ -19,13 +19,14 @@ class Monster():
         pygame.image.load(f"photo/forestelement.png"), (scale(20), scale(20)))
     elementimg["forest"] = img
 
-    def __init__(self, times, serverstarttime):
+    def __init__(self, times, serverstarttime, id):
         self.atk = random.randint(1, 10)
         self.hp = random.randint(1, 10)
+        self.id = id
         self.speed = scale(random.randint(2, 4))
         self.time = times
         self.nowtime = times-serverstarttime
-        self.nowdifficulty = int(self.nowtime//20) + 1
+        self.nowdifficulty = int(self.nowtime//30) + 1
         self.weakskill = [
             [Monster.element[random.randint(0, 2)] for i in range(3)]for i in range(self.nowdifficulty)]
         self.x = width*1.5

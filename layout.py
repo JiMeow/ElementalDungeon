@@ -1,4 +1,5 @@
 import pygame
+from setting import *
 
 
 class Layout():
@@ -19,6 +20,9 @@ class Layout():
     def updatestatus(self, status):
         self.status = status
 
+    def updatemonster(self, monster):
+        self.monster = monster
+
     def draw(self):
         self.map.draw()
         self.player.draw(self.win)
@@ -26,8 +30,13 @@ class Layout():
             if self.status[player.id-1] == 1 and player.id != self.player.id:
                 player.draw(self.win)
 
-        self.text = self.font.render(
+        self.textFPS = self.font.render(
             f"{self.clock.get_fps():.2f}", True, "white")
-        self.textrect = self.text.get_rect(topleft=(10, 50))
-        self.win.blit(self.text, self.textrect)
+        self.win.blit(self.textFPS, self.textFPS.get_rect(
+            topleft=(scale(10), scale(50))))
+
+        self.textScore = self.font.render(
+            f"{self.monster.id-1}", True, "white")
+        self.win.blit(self.textScore,
+                      self.textScore.get_rect(topleft=(scale(1400), scale(50))))
         pygame.display.update()

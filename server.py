@@ -17,6 +17,7 @@ except socket.error as e:
     str(e)
 
 s.listen(20)
+monstercnt = 1
 serverstarttime = time.time()
 print("Waiting for a connection, Server Started")
 maxPlayers = 10
@@ -26,7 +27,7 @@ for i in range(maxPlayers):
     players.append(Player(i+1, 30, 30, 50, 34, (0, 0, 0), f"Player{i+1}"))
 
 monster = []
-monster.append(Monster(time.time(), serverstarttime))
+monster.append(Monster(time.time(), serverstarttime, monstercnt))
 
 currentPlayer = {}
 
@@ -41,6 +42,8 @@ def threaded_client(conn, player):
     """
     print(player, "connected")
     global currentPlayer
+    global serverstarttime
+    global monstercnt
     conn.send(pickle.dumps((players[player], time.time())))
 
     reply = ""
@@ -51,14 +54,19 @@ def threaded_client(conn, player):
             if data.atk != 0:
                 if data.atk == 9999:  # player hp - 1
                     monster.pop(0)
-                    monster.append(Monster(time.time(), serverstarttime))
+                    monstercnt = 1
+                    serverstarttime = time.time()
+                    monster.append(
+                        Monster(time.time(), serverstarttime, monstercnt))
                 elif monster[0].weakskill[0] == data.atkelement:
                     monster[0].weakskill.pop(0)
                     data.atksuccess = 45
                     attacksuccess = 45
                     if len(monster[0].weakskill) == 0:
                         monster.pop(0)
-                        monster.append(Monster(time.time(), serverstarttime))
+                        monstercnt += 1
+                        monster.append(
+                            Monster(time.time(), serverstarttime, monstercnt))
                 data.atk = 0
             players[player] = data
             if not data:
