@@ -45,7 +45,9 @@ def threaded_client(conn, player):
     global serverstarttime
     global monstercnt
     conn.send(pickle.dumps((players[player], time.time())))
-
+    username = pickle.loads(conn.recv(65536))
+    conn.send(pickle.dumps(True))
+    players[player].name = username
     reply = ""
     while True:
         attacksuccess = 0
@@ -57,13 +59,14 @@ def threaded_client(conn, player):
                     monster.pop(0)
                     serverstarttime = time.time()
                     monstercnt = 1
-                    scoreboard = {}
+                    for name in scoreboard:
+                        scoreboard[name] = [0, data.id]
                     monster.append(
                         Monster(time.time(), serverstarttime, monstercnt))
                 elif monster[0].weakskill[0] == data.atkelement:
                     if data.name not in scoreboard:
-                        scoreboard[data.name] = 0
-                    scoreboard[data.name] += 1
+                        scoreboard[data.name] = [0, data.id]
+                    scoreboard[data.name][0] += 1
                     monster[0].weakskill.pop(0)
                     data.atksuccess = 45
                     attacksuccess = 45

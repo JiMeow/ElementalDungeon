@@ -106,15 +106,16 @@ class Layout():
         self.win.blit(self.textscoreboard,
                       self.textscoreboard.get_rect(topleft=(scale(1395), scale(100))))
         index = 0
-        for name, score in sorted(self.scoreboard.items(), key=lambda x: x[1], reverse=True):
-            idtemp = int(name[-1])
-            if self.status[idtemp-1] == 1:
+        # print(self.scoreboard)
+        for name, data in sorted(self.scoreboard.items(), key=lambda x: x[1], reverse=True):
+            score, id = data
+            if self.status[id-1] == 1:
                 if index == 0:
                     self.textscoreboard = pygame.font.Font(None, int(scale(25))).render(
-                        f"{name} : {' '*(3-len(str(score)))} {score}", True, Layout.colorlist[int(time.time()*2) % len(Layout.colorlist)])
+                        f"{name}{' '*(7-len(name))} : {' '*(3-len(str(score)))} {score}", True, Layout.colorlist[int(time.time()*2) % len(Layout.colorlist)])
                 else:
                     self.textscoreboard = pygame.font.Font(None, int(scale(25))).render(
-                        f"{name} : {' '*(3-len(str(score)))} {score}", True, "White")
+                        f"{name}{' '*(7-len(name))} : {' '*(3-len(str(score)))} {score}", True, "White")
                 self.win.blit(self.textscoreboard,
                               self.textscoreboard.get_rect(topleft=(scale(1400), scale(140+35*index))))
                 index += 1

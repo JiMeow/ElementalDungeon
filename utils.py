@@ -28,7 +28,6 @@ def setdatafromserver(allp, status, monster, player, scoreboard, tempallp, temps
     while(len(monster) != 0):
         monster.pop(0)
     monster.append(tempmonster[0])
-    # print(playerreturn)
     player.atksuccess = max(
         playerreturn["playeratksuccess"], player.atksuccess)
     player.timeinvokedelay = max(

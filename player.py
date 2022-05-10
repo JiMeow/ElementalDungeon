@@ -70,9 +70,13 @@ class Player():
         font = pygame.font.Font(None, int(scale(20)))
         text = font.render(str(self.name), True, "black")
         if self.id > 6:
-            win.blit(text, (scale(252), scale(800-100*(self.id-6)+40)))
+            rect = text.get_rect(
+                center=(scale(277), scale(845-100*(self.id-6))))
+            win.blit(text, rect)
         else:
-            win.blit(text, (scale(52), scale(800-100*self.id+40)))
+            rect = text.get_rect(
+                center=(scale(77), scale(845-100*self.id)))
+            win.blit(text, rect)
 
     def drawelement(self, win):
         for index in range(len(self.elementSlot)):

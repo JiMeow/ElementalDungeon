@@ -18,6 +18,10 @@ class Game():
 
         self.network = Network()
         self.player, self.servertime = self.network.getInitData()
+
+        username = input("Username: ")
+        self.login = self.network.send(username)
+        self.player.name = username
         self.deltatime = time.time()-self.servertime
         self.clock = pygame.time.Clock()
 
