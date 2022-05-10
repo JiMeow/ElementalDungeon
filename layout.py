@@ -29,7 +29,7 @@ class Layout():
 
     def __init__(self, win, clock):
         self.win = win
-        self.font = pygame.font.Font(None, 20)
+        self.font = pygame.font.Font(None, int(scale(20)))
         self.clock = clock
 
     def updatemap(self, map):
@@ -59,7 +59,7 @@ class Layout():
         self.win.blit(self.textFPS, self.textFPS.get_rect(
             topleft=(scale(10), scale(50))))
 
-        self.textScore = pygame.font.Font(None, 40).render(
+        self.textScore = pygame.font.Font(None, int(scale(40))).render(
             f"Stage: {self.monster.id-1}", True, "white")
         self.win.blit(self.textScore,
                       self.textScore.get_rect(topleft=(scale(1390), scale(50))))
@@ -70,29 +70,29 @@ class Layout():
 
             self.win.blit(
                 Layout.img["fire"], (width//2-scale(80), height-scale(200), scale(30), scale(30)))
-            self.textfire = pygame.font.Font(None, 30).render(
+            self.textfire = pygame.font.Font(None, int(scale(30))).render(
                 f": q", True, "Black")
             self.win.blit(self.textfire,
                           self.textfire.get_rect(topleft=(width//2-scale(45), height-scale(195))))
 
             self.win.blit(
                 Layout.img["forest"], (width//2-scale(80), height-scale(150), scale(30), scale(30)))
-            self.textforest = pygame.font.Font(None, 30).render(
+            self.textforest = pygame.font.Font(None, int(scale(30))).render(
                 f": w", True, "Black")
             self.win.blit(self.textforest,
                           self.textforest.get_rect(topleft=(width//2-scale(45), height-scale(145))))
 
             self.win.blit(
                 Layout.img["water"], (width//2+scale(15), height-scale(200), scale(30), scale(30)))
-            self.textwater = pygame.font.Font(None, 30).render(
+            self.textwater = pygame.font.Font(None, int(scale(30))).render(
                 f": e", True, "Black")
             self.win.blit(self.textwater,
                           self.textwater.get_rect(topleft=(width//2+scale(50), height-scale(195))))
 
             self.win.blit(
                 Layout.img["invoke"], (width//2+scale(15), height-scale(150), scale(30), scale(30)))
-            self.yexyinvoke = pygame.font.Font(None, 30).render(
+            self.textinvoke = pygame.font.Font(None, int(scale(30))).render(
                 f": r", True, "Black")
-            self.win.blit(self.yexyinvoke,
-                          self.yexyinvoke.get_rect(topleft=(width//2+scale(50), height-scale(145))))
+            self.win.blit(self.textinvoke,
+                          self.textinvoke.get_rect(topleft=(width//2+scale(50), height-scale(145))))
         pygame.display.update()

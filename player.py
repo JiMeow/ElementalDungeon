@@ -4,7 +4,7 @@ from setting import *
 
 def loadPlayerimg():
     playerimg = []
-    for i in range(1, 5):
+    for i in range(1, 15):
         imgleft = pygame.transform.scale(
             pygame.image.load(f"photo/player{i}.png"), (scale(50), scale(34)))
         playerimg.append(pygame.transform.flip(imgleft, True, False))
@@ -51,9 +51,13 @@ class Player():
         self.atk = 0
 
     def draw(self, win):
+        if self.id > 6:
+            win.blit(Player.playerimg[self.id-1],
+                     (scale(250), scale(800-100*(self.id-6)), scale(50), scale(34)))
+        else:
+            win.blit(Player.playerimg[self.id-1],
+                     (scale(50), scale(800-100*self.id), scale(50), scale(34)))
 
-        win.blit(Player.playerimg[self.id-1],
-                 (scale(50), scale(800-100*self.id), scale(50), scale(34)))
         self.drawelement(win)
         self.drawname(win)
         if self.atksuccess != 0:
@@ -63,18 +67,29 @@ class Player():
             self.timeinvokedelay -= 1
 
     def drawname(self, win):
-        font = pygame.font.Font(None, 20)
+        font = pygame.font.Font(None, int(scale(20)))
         text = font.render(str(self.name), True, "black")
-        win.blit(text, (scale(52), scale(800-100*self.id+40)))
+        if self.id > 6:
+            win.blit(text, (scale(252), scale(800-100*(self.id-6)+40)))
+        else:
+            win.blit(text, (scale(52), scale(800-100*self.id+40)))
 
     def drawelement(self, win):
         for index in range(len(self.elementSlot)):
-            win.blit(Player.elementimg[self.elementSlot[index]],
-                     (scale(40+25*index), scale(800-self.height-100*self.id), scale(20), scale(20)))
+            if self.id > 6:
+                win.blit(Player.elementimg[self.elementSlot[index]],
+                         (scale(240+25*index), scale(800-100*(self.id-6)-self.height), scale(20), scale(20)))
+            else:
+                win.blit(Player.elementimg[self.elementSlot[index]],
+                         (scale(40+25*index), scale(800-100*self.id-self.height), scale(20), scale(20)))
 
     def drawatksuccess(self, win):
-        win.blit(Player.starimg, (scale(110), scale(
-            800-100*self.id), scale(20), scale(20)))
+        if self.id > 6:
+            win.blit(Player.starimg, (scale(310), scale(
+                800-100*(self.id-6)), scale(20), scale(20)))
+        else:
+            win.blit(Player.starimg, (scale(110), scale(
+                800-100*self.id), scale(20), scale(20)))
 
     def invokeskill(self, skill):
         if skill == pygame.K_r or skill == pygame.K_SPACE or skill == pygame.K_KP_ENTER:

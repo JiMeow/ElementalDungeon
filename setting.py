@@ -5,8 +5,10 @@ server = "25.34.159.172"  # Input server IP of you hamachi host here
 port = 5555
 width = 1536
 height = 864
-width = 1920
-height = 1080
+# width = 768
+# height = 432
+# width = 1920
+# height = 1080
 maxPlayers = 15
 
 

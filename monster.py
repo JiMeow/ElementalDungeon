@@ -29,8 +29,8 @@ class Monster():
         self.nowdifficulty = int(self.nowtime//30) + 1
         self.weakskill = [
             [Monster.element[random.randint(0, 2)] for i in range(3)]for i in range(self.nowdifficulty)]
-        self.x = width*1.5
-        self.y = height//2-20
+        self.x = 1536*1.5
+        self.y = 968//2-20
         self.tempx = self.x
         self.tempy = self.y
 
