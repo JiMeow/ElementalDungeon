@@ -155,15 +155,6 @@ class UI():
         self.data["password"] = self.entry_password.get()
         if self.data["username"] == "" or len(self.data["username"]) >= 8:
             return
-        with open("config.json", "w") as f:
-            if self.screensize == 0:
-                json.dump({"width": 1280, "height": 720}, f, indent=4)
-            if self.screensize == 1:
-                json.dump({"width": 1536, "height": 864}, f, indent=4)
-            if self.screensize == 2:
-                json.dump({"width": 1920, "height": 1080}, f, indent=4)
-            if self.screensize == 3:
-                json.dump({"width": 2560, "height": 1440}, f, indent=4)
         self.root.withdraw()
         self.root.quit()
 
@@ -177,8 +168,8 @@ class UI():
             self.menu()
 
     def change_screensize(self, val):
-        self.check.place_configure(x=110, y=160+80*val)
-        self.screensize = val
+        messagebox.showerror(
+            "warning", "Sorry changing screen size is not supported yet")
 
     def open_browser(self):
         webbrowser.open("https://github.com/jiratQ/ElementalDungeon")
