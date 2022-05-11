@@ -45,9 +45,6 @@ def threaded_client(conn, player):
     global serverstarttime
     global monstercnt
     conn.send(pickle.dumps((players[player], time.time())))
-    username = pickle.loads(conn.recv(65536))
-    conn.send(pickle.dumps(True))
-    players[player].name = username
     reply = ""
     while True:
         attacksuccess = 0
@@ -102,7 +99,6 @@ def threaded_client(conn, player):
             break
 
     print(player, "disconnected")
-
     currentPlayer[player] = 0
     scoreboard.pop(players[player].name)
     players[player].x = 30

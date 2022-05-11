@@ -12,6 +12,8 @@ import time
 
 class Game():
     def __init__(self):
+
+        username = input("Username: ")
         self.win = pygame.display.set_mode((width, height))
         pygame.display.set_caption("ElementalDungeon")
         pygame.init()
@@ -19,8 +21,6 @@ class Game():
         self.network = Network()
         self.player, self.servertime = self.network.getInitData()
 
-        username = input("Username: ")
-        self.login = self.network.send(username)
         self.player.name = username
         self.deltatime = time.time()-self.servertime
         self.clock = pygame.time.Clock()
