@@ -1,6 +1,7 @@
 import random
 import pygame
 from setting import *
+
 import time
 
 

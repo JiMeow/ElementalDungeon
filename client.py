@@ -1,5 +1,7 @@
 import pygame
+import json
 from threading import *
+from ui import UI
 from utils import *
 from map import Map, readmap
 from network import Network
@@ -11,17 +13,16 @@ import time
 
 
 class Game():
-    def __init__(self):
+    def __init__(self, username, password):
+        print("Game Start, " + username + " " + password)
+        print(width, height)
+        self.network = Network()
+        self.player, self.servertime = self.network.getInitData()
+        self.player.name = username
 
-        username = input("Username: ")
         self.win = pygame.display.set_mode((width, height))
         pygame.display.set_caption("ElementalDungeon")
         pygame.init()
-
-        self.network = Network()
-        self.player, self.servertime = self.network.getInitData()
-
-        self.player.name = username
         self.deltatime = time.time()-self.servertime
         self.clock = pygame.time.Clock()
 
@@ -103,5 +104,12 @@ class Game():
             self.frame += 1
 
 
-game = Game()
-game.play()
+datafromUI = {}
+ui = UI(datafromUI)
+while True:
+    ui.show()
+    username, password = datafromUI["username"], datafromUI["password"]
+    update_setting()
+    print(width, height)
+    game = Game(username, password)
+    game.play()

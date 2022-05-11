@@ -1,4 +1,5 @@
 from setting import *
+
 from threading import *
 from player import Player
 from monster import Monster
