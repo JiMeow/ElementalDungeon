@@ -21,7 +21,6 @@ class UI():
         self.root = Tk()
         self.root.geometry('480x570+720+255')
         self.root.title("ElementalDungeon")
-        self.root.wm_attributes('-transparentcolor', '#ab23ff')
         self.root.resizable(0, 0)
         self.sprites = []
         self.dontclick = 0

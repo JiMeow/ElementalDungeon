@@ -1,4 +1,4 @@
-from setting import scale
+from setting import *
 
 
 class checkDamage():

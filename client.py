@@ -1,21 +1,19 @@
 import pygame
 import json
 from threading import *
-from ui import UI
 from utils import *
+from ui import UI
+from setting import *
 from map import Map, readmap
 from network import Network
 from player import Player
 from layout import Layout
 from checkDamage import checkDamage
-from setting import *
 import time
 
 
 class Game():
     def __init__(self, username, password):
-        print("Game Start, " + username + " " + password)
-        print(width, height)
         self.network = Network()
         self.player, self.servertime = self.network.getInitData()
         self.player.name = username
@@ -109,7 +107,5 @@ ui = UI(datafromUI)
 while True:
     ui.show()
     username, password = datafromUI["username"], datafromUI["password"]
-    update_setting()
-    print(width, height)
     game = Game(username, password)
     game.play()
