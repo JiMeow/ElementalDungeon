@@ -1,12 +1,14 @@
 from setting import *
 from tile import Tile
+from bookskill import BookSkill
 
 
 class Map():
-    def __init__(self, tilelist, win, player):
+    def __init__(self, tilelist, win, player, bookskill):
         self.player = player
         self.win = win
         self.tile = tilelist
+        self.bookskill = bookskill
         for layer in range(2):
             for row in range(len(tilelist[layer])):
                 for col in range(len(tilelist[layer][0])):
@@ -23,6 +25,7 @@ class Map():
                     if self.tile[layer][row][col] != -1:
                         self.tile[layer][row][col].draw(self.win, self.player)
         self.monster.draw(self.win)
+        self.bookskill.draw()
 
     def update(self, player, monster):
         self.player = player

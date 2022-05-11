@@ -53,7 +53,7 @@ class Player():
     def draw(self, win):
         if self.id > 6:
             win.blit(Player.playerimg[self.id-1],
-                     (scale(250), scale(800-100*(self.id-6)), scale(50), scale(34)))
+                     (scale(150), scale(800-100*(self.id-6)), scale(50), scale(34)))
         else:
             win.blit(Player.playerimg[self.id-1],
                      (scale(50), scale(800-100*self.id), scale(50), scale(34)))
@@ -71,7 +71,7 @@ class Player():
         text = font.render(str(self.name), True, "black")
         if self.id > 6:
             rect = text.get_rect(
-                center=(scale(277), scale(845-100*(self.id-6))))
+                center=(scale(177), scale(845-100*(self.id-6))))
             win.blit(text, rect)
         else:
             rect = text.get_rect(
@@ -82,7 +82,7 @@ class Player():
         for index in range(len(self.elementSlot)):
             if self.id > 6:
                 win.blit(Player.elementimg[self.elementSlot[index]],
-                         (scale(240+25*index), scale(800-100*(self.id-6)-self.height), scale(20), scale(20)))
+                         (scale(140+25*index), scale(800-100*(self.id-6)-self.height), scale(20), scale(20)))
             else:
                 win.blit(Player.elementimg[self.elementSlot[index]],
                          (scale(40+25*index), scale(800-100*self.id-self.height), scale(20), scale(20)))

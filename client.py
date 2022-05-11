@@ -9,6 +9,7 @@ from network import Network
 from player import Player
 from layout import Layout
 from checkDamage import checkDamage
+from bookskill import BookSkill
 import time
 
 
@@ -36,8 +37,10 @@ class Game():
                                  "timeinvokedelay": 0,
                                  "scoreboard": {}, }
         self.scoreboard = {}
+        self.bookskill = BookSkill(
+            self.win, (scale(50), scale(50), scale(75), scale(75)))
 
-        self.map = Map(readmap(), self.win, self.player)
+        self.map = Map(readmap(), self.win, self.player, self.bookskill)
         self.layout = Layout(self.win, self.clock)
 
         self.thread = Thread(target=getDataFromServer, args=(
@@ -78,6 +81,7 @@ class Game():
                         pygame.quit()
                         self.network.disconnect()
                         break
+                self.bookskill.get_event(event)
 
             if not self.run:
                 break
@@ -102,10 +106,14 @@ class Game():
             self.frame += 1
 
 
-datafromUI = {}
+datafromUI = []
 ui = UI(datafromUI)
 while True:
     ui.show()
-    username, password = datafromUI["username"], datafromUI["password"]
+    if len(datafromUI) != 2:
+        break
+    username, password = datafromUI
     game = Game(username, password)
     game.play()
+
+print("BYE")

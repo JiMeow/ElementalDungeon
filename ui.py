@@ -16,8 +16,10 @@ def _from_rgb(rgb):
 
 class UI():
 
-    def __init__(self, data={}):
+    def __init__(self, data=[]):
         self.data = data
+        while len(self.data) != 0:
+            self.data.pop(0)
         self.root = Tk()
         self.root.geometry('480x570+720+255')
         self.root.title("ElementalDungeon")
@@ -151,15 +153,21 @@ class UI():
         self.BCheck.place(x=100, y=360)
 
     def get(self):
-        self.data["username"] = self.entry_username.get()
-        self.data["password"] = self.entry_password.get()
-        if self.data["username"] == "" or len(self.data["username"]) >= 8:
+        self.data.append(self.entry_username.get())
+        self.data.append(self.entry_password.get())
+        self.entry_password.delete(0, END)
+        if self.data[0] == "" or len(self.data[0]) >= 8:
+            while len(self.data) != 0:
+                self.data.pop(0)
             return
+
         self.root.withdraw()
         self.root.quit()
 
     def show(self):
         self.root.deiconify()
+        while len(self.data) != 0:
+            self.data.pop(0)
         self.menu()
         self.root.mainloop()
 
