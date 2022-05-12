@@ -4,6 +4,7 @@
   - [Connect with friends](#connect-with-friends)
   - [Game detail](#game-detail)
   - [Thank you](#thank-you)
+    - [Image](#image)
     - [Sound](#sound)
 
 <br>
@@ -12,9 +13,7 @@ Coop Multiplayer 2D Game
 <br>
 <img src="https://i.imgur.com/vlGtMhT.png" width="150"> <img src="https://i.imgur.com/YXAvFE3.png" width="150">
 
-<br>
 This game let you be slime wizard who can invoke the 3 elemental
-
 to a powerful spell, that can destroy the enemy if enemy is weak to 
 that spell.
 
@@ -27,10 +26,11 @@ you host then you run client.py then you can play the game.
 
 ![hamachi-removebg-preview](https://i.imgur.com/DL4iZX8.png)
 
->P.S. for host you need to edit setting ip then run server.py 
+>P.S. for host you need to edit ip in setting.py then run server.py 
 and don't forget to connect you hamachi with you friends for 
 play the game togethers.
 
+<br>
 ## Game detail
 <img src="https://i.imgur.com/aCSYgvE.png" width="750">
 
@@ -57,14 +57,13 @@ and invoke by key r, space or enter on numpad
 
 <img src="https://i.imgur.com/OKduA9x.png" width="123"><img src="https://i.imgur.com/OKduA9x.png" width="123"><img src="https://i.imgur.com/OKduA9x.png" width="123">
 
+- others body in background of this project
+
+### Image
 - slime image from [Chompo-Bompo](https://www.reddit.com/r/slimerancher/comments/haklxi/i_made_all_the_slime_in_pixel_art/)
 - element image from [freelancer.ca](https://www.freelancer.ca/contest/Draw-orb-for-a-fantasy-game-1420427-byentry-23538948?w=f&ngsw-bypass=)
 - cloud image from [toppng.com](https://toppng.com/cloud-fixed-06-blueberry-sans-pixel-art-PNG-free-PNG-Images_179684)
 - map tile image from [craftpix.net](https://craftpix.net/product/aeromancer-skill-icons-pixel-art/)
-- others body in background of this project
-
-
 ### Sound
-
-[Immense - Inspiring Epic Music By Keys of Moon Music](https://soundcloud.com/keysofmoon)
-https://creativecommons.org/licenses/by/4.0/
+- [Immense - Inspiring Epic Music By Keys of Moon Music](https://soundcloud.com/keysofmoon)
+- https://creativecommons.org/licenses/by/4.0/
