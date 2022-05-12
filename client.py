@@ -12,7 +12,7 @@ from src.bookskill import BookSkill
 
 
 class Game():
-    def __init__(self, username, password):
+    def __init__(self, username, password, soundstatus):
         self.frame = 0
         self.network = Network()
         self.player = self.network.getInitData()
@@ -21,7 +21,11 @@ class Game():
         self.win = pygame.display.set_mode((width, height))
         pygame.display.set_caption("ElementalDungeon")
         pygame.init()
-
+        if soundstatus:
+            pygame.mixer.init()
+            pygame.mixer.music.load('sound.mp3')
+            pygame.mixer.music.play()
+            pygame.mixer.music.set_volume(0.2)
         self.login, self.servertime = self.network.send((username, password))
         self.deltatime = time.time()-self.servertime
         self.clock = pygame.time.Clock()
@@ -113,10 +117,10 @@ ui = UI(datafromUI)
 login = True
 while True:
     ui.show(login)
-    if len(datafromUI) != 2:
+    if len(datafromUI) != 3:
         break
-    username, password = datafromUI
-    game = Game(username, password)
+    username, password, soundstatus = datafromUI
+    game = Game(username, password, soundstatus)
     game.play()
     login = game.login
 

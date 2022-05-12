@@ -1,3 +1,4 @@
+import pygame
 from pygame.locals import *
 from tkinter import *
 from tkinter import messagebox
@@ -161,6 +162,7 @@ class UI():
     def get(self):
         self.data.append(self.entry_username.get())
         self.data.append(self.entry_password.get())
+        self.data.append(self.soundstatus)
         self.entry_password.delete(0, END)
         if self.data[0] == "" or len(self.data[0]) >= 8:
             self.warning1.config(
@@ -175,6 +177,10 @@ class UI():
 
     def show(self, login):
         self.root.deiconify()
+        pygame.mixer.init()
+        pygame.mixer.music.load('sound.mp3')
+        pygame.mixer.music.play()
+        pygame.mixer.music.set_volume(0.2)
         while len(self.data) != 0:
             self.data.pop(0)
         if login:
@@ -197,6 +203,10 @@ class UI():
     def changeSoundStatus(self):
         self.soundstatus = 1 - self.soundstatus
         self.BSound.configure(image=self.soundimg[self.soundstatus])
+        if self.soundstatus == 0:
+            pygame.mixer.music.set_volume(0)
+        else:
+            pygame.mixer.music.set_volume(0.2)
 
     def dont(self):
         self.dontclick += 1
