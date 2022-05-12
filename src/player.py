@@ -1,12 +1,12 @@
+from src.setting import *
 import pygame
-from setting import *
 
 
 def loadPlayerimg():
     playerimg = []
     for i in range(1, 15):
         imgleft = pygame.transform.scale(
-            pygame.image.load(f"photo/player{i}.png"), (scale(50), scale(34)))
+            pygame.image.load(f"src/photo/player{i}.png"), (scale(50), scale(34)))
         playerimg.append(pygame.transform.flip(imgleft, True, False))
     return playerimg
 
@@ -14,20 +14,20 @@ def loadPlayerimg():
 def loadElementimg():
     elementimg = {}
     img = pygame.transform.scale(
-        pygame.image.load(f"photo/fireelement.png"), (scale(20), scale(20)))
+        pygame.image.load(f"src/photo/fireelement.png"), (scale(20), scale(20)))
     elementimg["fire"] = img
     img = pygame.transform.scale(
-        pygame.image.load(f"photo/waterelement.png"), (scale(20), scale(20)))
+        pygame.image.load(f"src/photo/waterelement.png"), (scale(20), scale(20)))
     elementimg["water"] = img
     img = pygame.transform.scale(
-        pygame.image.load(f"photo/forestelement.png"), (scale(20), scale(20)))
+        pygame.image.load(f"src/photo/forestelement.png"), (scale(20), scale(20)))
     elementimg["forest"] = img
     return elementimg
 
 
 def loadStarimg():
     return pygame.transform.scale(
-        pygame.image.load(f"photo/star.png"), (scale(30), scale(30)))
+        pygame.image.load(f"src/photo/star.png"), (scale(30), scale(30)))
 
 
 class Player():

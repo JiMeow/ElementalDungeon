@@ -1,4 +1,4 @@
-from setting import *
+from src.setting import *
 
 
 class checkDamage():

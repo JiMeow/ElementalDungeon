@@ -1,14 +1,13 @@
-from setting import *
-
+from src.setting import *
 from threading import *
-from player import Player
-from monster import Monster
 import socket
 import json
 import time
 import pickle
 import pygame
 import hashlib
+from src.player import Player
+from src.monster import Monster
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
@@ -46,6 +45,21 @@ def threaded_client(conn, player):
     global serverstarttime
     global monstercnt
     conn.send(pickle.dumps((players[player], time.time())))
+
+    username, password = pickle.loads(conn.recv(65536))
+    password = hashlib.sha256(password.encode()).hexdigest()
+    login = False
+    with open("user.json", "r") as f:
+        userdata = json.load(f)
+    if username in userdata:
+        if password == userdata[username]:
+            login = True
+        else:
+            login = False
+    else:
+        login = True
+
+    conn.send(pickle.dumps(login))
     reply = ""
     while True:
         attacksuccess = 0
@@ -101,6 +115,12 @@ def threaded_client(conn, player):
             break
 
     print(player, "disconnected")
+
+    if login:
+        with open("user.json", "w") as f:
+            userdata[username] = password
+            json.dump(userdata, f, indent=4)
+
     currentPlayer[player] = 0
     scoreboard.pop(players[player].name)
     players[player].x = 30

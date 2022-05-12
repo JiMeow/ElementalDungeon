@@ -1,6 +1,5 @@
-from setting import *
-from tile import Tile
-from bookskill import BookSkill
+from src.setting import *
+from src.tile import Tile
 
 
 class Map():
@@ -36,7 +35,7 @@ def readmap():
     result = []
     for i in range(2):
         ans = []
-        with open(f"map/map_{i+1}.csv", "r") as f:
+        with open(f"src/map/map_{i+1}.csv", "r") as f:
             r = f.read().strip().split('\n')
             for i in range(len(r)):
                 r[i] = r[i].strip().split(',')

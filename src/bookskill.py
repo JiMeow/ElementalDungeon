@@ -1,5 +1,5 @@
+from src.setting import *
 import pygame
-from setting import *
 
 
 class BookSkill():
@@ -7,21 +7,21 @@ class BookSkill():
     skillist = []
     for i in range(1, 11):
         imgleft = pygame.transform.scale(
-            pygame.image.load(f"photo/skill_{i}.jpg"), (scale(40), scale(40)))
+            pygame.image.load(f"src/photo/skill_{i}.jpg"), (scale(40), scale(40)))
         skillist.append(imgleft)
 
     bookskillimg = pygame.transform.scale(
-        pygame.image.load("photo/bookskill2.png"), (scale(400), scale(300)))
+        pygame.image.load("src/photo/bookskill2.png"), (scale(400), scale(300)))
 
     elementimg = {}
     img = pygame.transform.scale(
-        pygame.image.load(f"photo/fireelement.png"), (scale(25), scale(25)))
+        pygame.image.load(f"src/photo/fireelement.png"), (scale(25), scale(25)))
     elementimg["fire"] = img
     img = pygame.transform.scale(
-        pygame.image.load(f"photo/waterelement.png"), (scale(25), scale(25)))
+        pygame.image.load(f"src/photo/waterelement.png"), (scale(25), scale(25)))
     elementimg["water"] = img
     img = pygame.transform.scale(
-        pygame.image.load(f"photo/forestelement.png"), (scale(25), scale(25)))
+        pygame.image.load(f"src/photo/forestelement.png"), (scale(25), scale(25)))
     elementimg["forest"] = img
 
     skillnum = [['fire', 'fire', 'fire'],
@@ -35,7 +35,7 @@ class BookSkill():
                 ['water', 'water', 'forest'],
                 ['fire', 'forest', 'water']]
 
-    def __init__(self, win, rect, imagepath="photo/spellbook.png"):
+    def __init__(self, win, rect, imagepath="src/photo/spellbook.png"):
         self.win = win
         self.rect = pygame.Rect(rect)
         self.isdraw = 0

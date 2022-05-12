@@ -1,6 +1,6 @@
+from src.setting import *
 import random
 import pygame
-from setting import *
 import time
 
 
@@ -9,25 +9,25 @@ class Monster():
     skillist = []
     for i in range(1, 11):
         imgleft = pygame.transform.scale(
-            pygame.image.load(f"photo/skill_{i}.jpg"), (scale(40), scale(40)))
+            pygame.image.load(f"src/photo/skill_{i}.jpg"), (scale(40), scale(40)))
         skillist.append(imgleft)
 
     monsterimg = []
     monsterimg.append(pygame.transform.scale(
-        pygame.image.load("photo/monster1.png"), (scale(158), scale(108))))
+        pygame.image.load("src/photo/monster1.png"), (scale(158), scale(108))))
     monsterimg.append(pygame.transform.scale(
-        pygame.image.load("photo/monster2.png"), (scale(158), scale(130))))
+        pygame.image.load("src/photo/monster2.png"), (scale(158), scale(130))))
 
     element = ["fire", "forest", "water"]
     elementimg = {}
     img = pygame.transform.scale(
-        pygame.image.load(f"photo/fireelement.png"), (scale(20), scale(20)))
+        pygame.image.load(f"src/photo/fireelement.png"), (scale(20), scale(20)))
     elementimg["fire"] = img
     img = pygame.transform.scale(
-        pygame.image.load(f"photo/waterelement.png"), (scale(20), scale(20)))
+        pygame.image.load(f"src/photo/waterelement.png"), (scale(20), scale(20)))
     elementimg["water"] = img
     img = pygame.transform.scale(
-        pygame.image.load(f"photo/forestelement.png"), (scale(20), scale(20)))
+        pygame.image.load(f"src/photo/forestelement.png"), (scale(20), scale(20)))
     elementimg["forest"] = img
 
     def __init__(self, times, serverstarttime, id):

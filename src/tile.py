@@ -1,5 +1,5 @@
+from src.setting import *
 import pygame
-from setting import *
 
 
 class Tile():
@@ -16,7 +16,7 @@ class Tile():
 
 
 def cut_picture(path):
-    surface = pygame.image.load(path)
+    surface = pygame.image.load(f"src/{path}")
     tile_num_x = surface.get_size()[0] // 16
     tile_num_y = surface.get_size()[1] // 16
     cut_tiles = []

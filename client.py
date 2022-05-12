@@ -1,32 +1,31 @@
-import pygame
-import json
+from src.setting import *
+from src.utils import *
 from threading import *
-from utils import *
-from ui import UI
-from setting import *
-from map import Map, readmap
-from network import Network
-from player import Player
-from layout import Layout
-from checkDamage import checkDamage
-from bookskill import BookSkill
+import pygame
 import time
+from src.map import Map, readmap
+from src.ui import UI
+from src.network import Network
+from src.layout import Layout
+from src.checkDamage import checkDamage
+from src.bookskill import BookSkill
 
 
 class Game():
     def __init__(self, username, password):
+        self.frame = 0
         self.network = Network()
         self.player, self.servertime = self.network.getInitData()
         self.player.name = username
+
+        self.login = self.network.send((username, password))
+        self.run = self.login
 
         self.win = pygame.display.set_mode((width, height))
         pygame.display.set_caption("ElementalDungeon")
         pygame.init()
         self.deltatime = time.time()-self.servertime
         self.clock = pygame.time.Clock()
-
-        self.run = True
-        self.frame = 0
 
         self.allp, self.status, self.monster = getDataFromServer(
             self.network, self.player)
@@ -105,15 +104,20 @@ class Game():
                          self.allp, self.status, self.monster[0], self.scoreboard)
             self.frame += 1
 
+        pygame.quit()
+        self.network.disconnect()
+
 
 datafromUI = []
 ui = UI(datafromUI)
+login = True
 while True:
-    ui.show()
+    ui.show(login)
     if len(datafromUI) != 2:
         break
     username, password = datafromUI
     game = Game(username, password)
     game.play()
+    login = game.login
 
 print("BYE")

@@ -1,24 +1,24 @@
+from src.setting import *
 import pygame
 import time
-from setting import *
 
 
 def loadimg():
     img = {}
     imgtemp = pygame.transform.scale(
-        pygame.image.load(f"photo/fireelement.png"), (scale(30), scale(30)))
+        pygame.image.load(f"src/photo/fireelement.png"), (scale(30), scale(30)))
     img["fire"] = imgtemp
     imgtemp = pygame.transform.scale(
-        pygame.image.load(f"photo/waterelement.png"), (scale(30), scale(30)))
+        pygame.image.load(f"src/photo/waterelement.png"), (scale(30), scale(30)))
     img["water"] = imgtemp
     imgtemp = pygame.transform.scale(
-        pygame.image.load(f"photo/forestelement.png"), (scale(30), scale(30)))
+        pygame.image.load(f"src/photo/forestelement.png"), (scale(30), scale(30)))
     img["forest"] = imgtemp
     imgtemp = pygame.transform.scale(
-        pygame.image.load(f"photo/invoke.png"), (scale(30), scale(30)))
+        pygame.image.load(f"src/photo/invoke.png"), (scale(30), scale(30)))
     img["invoke"] = imgtemp
     imgtemp = pygame.transform.scale(
-        pygame.image.load(f"photo/bookskill.png"), (scale(250), scale(180)))
+        pygame.image.load(f"src/photo/bookskill.png"), (scale(250), scale(180)))
     img["book"] = imgtemp
 
     return img

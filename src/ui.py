@@ -1,10 +1,8 @@
+from pygame.locals import *
 from tkinter import *
 from tkinter import messagebox
-from PIL import ImageTk, Image
-import json
 import webbrowser
-import pygame
-from pygame.locals import *
+from PIL import Image, ImageTk
 
 
 def _from_rgb(rgb):
@@ -30,26 +28,26 @@ class UI():
         self.screensize = 1
 
         iconphoto = ImageTk.PhotoImage(Image.open(
-            "photo/monster2.png").resize((50, 50), Image.ANTIALIAS))
+            "src/photo/monster2.png").resize((50, 50), Image.ANTIALIAS))
         self.root.iconphoto(False, iconphoto)
 
         self.soundimg = []
-        soundoff = Image.open("photo/soundoff.png")
+        soundoff = Image.open("src/photo/soundoff.png")
         self.soundimg.append(ImageTk.PhotoImage(
             soundoff.resize((40, 40), Image.ANTIALIAS)))
-        soundon = Image.open("photo/soundon.png")
+        soundon = Image.open("src/photo/soundon.png")
         self.soundimg.append(ImageTk.PhotoImage(
             soundon.resize((40, 40), Image.ANTIALIAS)))
 
         self.checkboximg = ImageTk.PhotoImage(Image.open(
-            "photo/checkbox.png").copy().resize((50, 50), Image.ANTIALIAS))
+            "src/photo/checkbox.png").copy().resize((50, 50), Image.ANTIALIAS))
         self.checkimg = ImageTk.PhotoImage(Image.open(
-            "photo/check.png").copy().resize((30, 30), Image.ANTIALIAS))
+            "src/photo/check.png").copy().resize((30, 30), Image.ANTIALIAS))
 
         self.bgimg = ImageTk.PhotoImage(Image.open(
-            "map/bgui2.png").resize((480, 720), Image.ANTIALIAS))
+            "src/map/bgui2.png").resize((480, 720), Image.ANTIALIAS))
         self.monsterimg = ImageTk.PhotoImage(Image.open(
-            "photo/monster1.png").resize((158, 100), Image.ANTIALIAS))
+            "src/photo/monster1.png").resize((158, 100), Image.ANTIALIAS))
         self.root.bind("<Key>", self.key_pressed)
 
     def menu(self):
@@ -121,7 +119,7 @@ class UI():
                              bg=_from_rgb((76, 63, 59)))
         self.monster.place(x=170, y=450)
 
-    def play(self):
+    def play(self, fail=False):
         canvas = Canvas(self.root, height=600, width=1000,
                         bg=_from_rgb((76, 63, 59)))
         canvas.place(x=-2, y=-2)
@@ -141,12 +139,20 @@ class UI():
         self.entry_password = Entry(self.root, width=45, show="*")
         self.entry_password.place(x=100, y=210)
 
-        self.warning1 = Label(
-            self.root, text="the length of username must less than eight", font=("", 10), fg='red', bg=_from_rgb((76, 63, 59)))
-        self.warning1.place(x=100, y=260)
-        self.warning2 = Label(
-            self.root, text="and username can't be empty.", font=("", 10), fg='red', bg=_from_rgb((76, 63, 59)))
-        self.warning2.place(x=100, y=280)
+        if not fail:
+            self.warning1 = Label(
+                self.root, text="the length of username must less than eight", font=("", 10), fg='red', bg=_from_rgb((76, 63, 59)))
+            self.warning1.place(x=100, y=260)
+            self.warning2 = Label(
+                self.root, text="and username can't be empty.", font=("", 10), fg='red', bg=_from_rgb((76, 63, 59)))
+            self.warning2.place(x=100, y=280)
+        else:
+            self.warning1 = Label(
+                self.root, text="username or password is incorrect, please try", font=("", 10), fg='red', bg=_from_rgb((76, 63, 59)))
+            self.warning1.place(x=100, y=260)
+            self.warning2 = Label(
+                self.root, text="again with another password.", font=("", 10), fg='red', bg=_from_rgb((76, 63, 59)))
+            self.warning2.place(x=100, y=280)
 
         self.BCheck = Button(self.root, text="Login To Game",
                              command=self.get, width=39, height=3, bg=_from_rgb((165, 121, 103)))
@@ -157,6 +163,9 @@ class UI():
         self.data.append(self.entry_password.get())
         self.entry_password.delete(0, END)
         if self.data[0] == "" or len(self.data[0]) >= 8:
+            self.warning1.config(
+                text="the length of username must less than eight")
+            self.warning2.config(text="and username can't be empty.")
             while len(self.data) != 0:
                 self.data.pop(0)
             return
@@ -164,11 +173,14 @@ class UI():
         self.root.withdraw()
         self.root.quit()
 
-    def show(self):
+    def show(self, login):
         self.root.deiconify()
         while len(self.data) != 0:
             self.data.pop(0)
-        self.menu()
+        if login:
+            self.menu()
+        else:
+            self.play(True)
         self.root.mainloop()
 
     def key_pressed(self, event):
