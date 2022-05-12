@@ -59,6 +59,11 @@ def threaded_client(conn, player):
     else:
         login = True
 
+    if login:
+        with open("user.json", "w") as f:
+            userdata[username] = password
+            json.dump(userdata, f, indent=4)
+
     conn.send(pickle.dumps(login))
     reply = ""
     while True:
@@ -115,11 +120,6 @@ def threaded_client(conn, player):
             break
 
     print(player, "disconnected")
-
-    if login:
-        with open("user.json", "w") as f:
-            userdata[username] = password
-            json.dump(userdata, f, indent=4)
 
     currentPlayer[player] = 0
     scoreboard.pop(players[player].name)
