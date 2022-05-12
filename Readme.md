@@ -31,6 +31,7 @@ and don't forget to connect you hamachi with you friends for
 play the game togethers.
 
 <br>
+
 ## Game detail
 <img src="https://i.imgur.com/aCSYgvE.png" width="750">
 
