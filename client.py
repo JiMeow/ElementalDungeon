@@ -15,17 +15,17 @@ class Game():
     def __init__(self, username, password):
         self.frame = 0
         self.network = Network()
-        self.player, self.servertime = self.network.getInitData()
+        self.player = self.network.getInitData()
         self.player.name = username
-
-        self.login = self.network.send((username, password))
-        self.run = self.login
 
         self.win = pygame.display.set_mode((width, height))
         pygame.display.set_caption("ElementalDungeon")
         pygame.init()
+
+        self.login, self.servertime = self.network.send((username, password))
         self.deltatime = time.time()-self.servertime
         self.clock = pygame.time.Clock()
+        self.run = self.login
 
         self.allp, self.status, self.monster = getDataFromServer(
             self.network, self.player)

@@ -44,7 +44,7 @@ def threaded_client(conn, player):
     global scoreboard
     global serverstarttime
     global monstercnt
-    conn.send(pickle.dumps((players[player], time.time())))
+    conn.send(pickle.dumps(players[player]))
 
     username, password = pickle.loads(conn.recv(65536))
     password = hashlib.sha256(password.encode()).hexdigest()
@@ -64,7 +64,7 @@ def threaded_client(conn, player):
             userdata[username] = password
             json.dump(userdata, f, indent=4)
 
-    conn.send(pickle.dumps(login))
+    conn.send(pickle.dumps((login, time.time())))
     reply = ""
     while True:
         attacksuccess = 0
