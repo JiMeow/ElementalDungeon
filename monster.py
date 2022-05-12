@@ -6,6 +6,12 @@ import time
 
 class Monster():
 
+    skillist = []
+    for i in range(1, 11):
+        imgleft = pygame.transform.scale(
+            pygame.image.load(f"photo/skill_{i}.jpg"), (scale(40), scale(40)))
+        skillist.append(imgleft)
+
     monsterimg = []
     monsterimg.append(pygame.transform.scale(
         pygame.image.load("photo/monster1.png"), (scale(158), scale(108))))
@@ -51,6 +57,38 @@ class Monster():
 
     def drawweak(self, win):
         for row in range(len(self.weakskill)):
-            for index in range(len(self.weakskill[row])):
-                win.blit(Monster.elementimg[self.weakskill[row][index]],
-                         (self.tempx + scale(40+25*index), self.tempy-scale(40*row+40), scale(20), scale(20)))
+            w1, w2, w3 = sorted(self.weakskill[row])
+            if w1 == "fire" and w2 == "fire" and w3 == "fire":
+                win.blit(Monster.skillist[0],
+                         (self.tempx + scale(40*(row % 3)), self.tempy-scale(40*(row//3)+50), scale(20), scale(20)))
+            if w1 == "fire" and w2 == "fire" and w3 == "forest":
+                win.blit(Monster.skillist[1],
+                         (self.tempx + scale(40*(row % 3)), self.tempy-scale(40*(row//3)+50), scale(20), scale(20)))
+            if w1 == "fire" and w2 == "fire" and w3 == "water":
+                win.blit(Monster.skillist[2],
+                         (self.tempx + scale(40*(row % 3)), self.tempy-scale(40*(row//3)+50), scale(20), scale(20)))
+            if w1 == "forest" and w2 == "forest" and w3 == "forest":
+                win.blit(Monster.skillist[3],
+                         (self.tempx + scale(40*(row % 3)), self.tempy-scale(40*(row//3)+50), scale(20), scale(20)))
+            if w3 == "forest" and w2 == "forest" and w1 == "fire":
+                win.blit(Monster.skillist[4],
+                         (self.tempx + scale(40*(row % 3)), self.tempy-scale(40*(row//3)+50), scale(20), scale(20)))
+            if w1 == "forest" and w2 == "forest" and w3 == "water":
+                win.blit(Monster.skillist[5],
+                         (self.tempx + scale(40*(row % 3)), self.tempy-scale(40*(row//3)+50), scale(20), scale(20)))
+            if w1 == "water" and w2 == "water" and w3 == "water":
+                win.blit(Monster.skillist[6],
+                         (self.tempx + scale(40*(row % 3)), self.tempy-scale(40*(row//3)+50), scale(20), scale(20)))
+            if w3 == "water" and w2 == "water" and w1 == "fire":
+                win.blit(Monster.skillist[7],
+                         (self.tempx + scale(40*(row % 3)), self.tempy-scale(40*(row//3)+50), scale(20), scale(20)))
+            if w3 == "water" and w2 == "water" and w1 == "forest":
+                win.blit(Monster.skillist[8],
+                         (self.tempx + scale(40*(row % 3)), self.tempy-scale(40*(row//3)+50), scale(20), scale(20)))
+            if w1 == "fire" and w2 == "forest" and w3 == "water":
+                win.blit(Monster.skillist[9],
+                         (self.tempx + scale(40*(row % 3)), self.tempy-scale(40*(row//3)+50), scale(20), scale(20)))
+
+            # for index in range(len(self.weakskill[row])):
+                # win.blit(Monster.elementimg[self.weakskill[row][index]],
+                #          (self.tempx + scale(40+25*index), self.tempy-scale(40*row+40), scale(20), scale(20)))

@@ -52,7 +52,8 @@ def threaded_client(conn, player):
         timeinvokedelay = 0
         try:
             data = pickle.loads(conn.recv(65536))
-            if data.atk != 0:
+            monster[0].update(1/60)
+            if data.atk != 0 and monster[0].tempx < width:
                 if data.atk == 9999:  # player hp - 1
                     monster.pop(0)
                     serverstarttime = time.time()
@@ -61,7 +62,7 @@ def threaded_client(conn, player):
                         scoreboard[name] = [0, data.id]
                     monster.append(
                         Monster(time.time(), serverstarttime, monstercnt))
-                elif monster[0].weakskill[0] == data.atkelement:
+                elif sorted(monster[0].weakskill[0]) == sorted(data.atkelement):
                     if data.name not in scoreboard:
                         scoreboard[data.name] = [0, data.id]
                     scoreboard[data.name][0] += 1
@@ -78,7 +79,7 @@ def threaded_client(conn, player):
                     timeinvokedelay = 45
                     print("Invoke Fail")
 
-                data.atk = 0
+            data.atk = 0
             players[player] = data
             if not data:
                 print("Disconnected")

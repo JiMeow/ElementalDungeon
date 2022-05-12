@@ -8,11 +8,11 @@ maxPlayers = 15
 # width = 256
 # height = 144
 
-width = 1280
-height = 720
+# width = 1280
+# height = 720
 
-# width = 1536
-# height = 864
+width = 1536
+height = 864
 
 # width = 1960
 # height = 1080
