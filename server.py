@@ -72,8 +72,11 @@ def threaded_client(conn, player):
         try:
             data = pickle.loads(conn.recv(65536))
             monster[0].update(1/60)
-            if data.atk != 0 and monster[0].tempx < width:
-                if data.atk == 9999:  # player hp - 1
+            if data.atk != 0:
+                if monster[0].tempx >= width:
+                    data.timeinvokedelay = 45
+                    timeinvokedelay = 45
+                elif data.atk == 9999:  # player hp - 1
                     monster.pop(0)
                     serverstarttime = time.time()
                     monstercnt = 1
