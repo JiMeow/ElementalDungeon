@@ -4,6 +4,8 @@ from threading import *
 import pygame
 import time
 from src.map import Map, readmap
+from src.player import Player
+from src.monster import Monster
 from src.ui import UI
 from src.network import Network
 from src.layout import Layout

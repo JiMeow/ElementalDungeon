@@ -1,4 +1,6 @@
 from src.setting import *
+from src.monster import Monster
+from src.player import Player
 import socket
 import pickle
 
