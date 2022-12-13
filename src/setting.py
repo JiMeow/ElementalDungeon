@@ -1,4 +1,4 @@
-server = "25.34.159.172"  # Input server IP of you hamachi host here
+# server = "25.34.159.172"  # Input server IP of you hamachi host here
 # server = "127.0.0.1"  # Localhost
 port = 5555
 maxPlayers = 15
@@ -14,6 +14,9 @@ height = 864
 
 # width = 1960
 # height = 1080
+
+with open("hostIP.txt", "r") as f:
+    server = f.read().strip()
 
 
 def scale(length):
