@@ -29,26 +29,26 @@ class UI():
         self.screensize = 1
 
         iconphoto = ImageTk.PhotoImage(Image.open(
-            "src/photo/monster2.png").resize((50, 50), Image.ANTIALIAS))
+            "src/photo/monster2.png").resize((50, 50), Image.LANCZOS))
         self.root.iconphoto(False, iconphoto)
 
         self.soundimg = []
         soundoff = Image.open("src/photo/soundoff.png")
         self.soundimg.append(ImageTk.PhotoImage(
-            soundoff.resize((40, 40), Image.ANTIALIAS)))
+            soundoff.resize((40, 40), Image.LANCZOS)))
         soundon = Image.open("src/photo/soundon.png")
         self.soundimg.append(ImageTk.PhotoImage(
-            soundon.resize((40, 40), Image.ANTIALIAS)))
+            soundon.resize((40, 40), Image.LANCZOS)))
 
         self.checkboximg = ImageTk.PhotoImage(Image.open(
-            "src/photo/checkbox.png").copy().resize((50, 50), Image.ANTIALIAS))
+            "src/photo/checkbox.png").copy().resize((50, 50), Image.LANCZOS))
         self.checkimg = ImageTk.PhotoImage(Image.open(
-            "src/photo/check.png").copy().resize((30, 30), Image.ANTIALIAS))
+            "src/photo/check.png").copy().resize((30, 30), Image.LANCZOS))
 
         self.bgimg = ImageTk.PhotoImage(Image.open(
-            "src/map/bgui2.png").resize((480, 720), Image.ANTIALIAS))
+            "src/map/bgui2.png").resize((480, 720), Image.LANCZOS))
         self.monsterimg = ImageTk.PhotoImage(Image.open(
-            "src/photo/monster1.png").resize((158, 100), Image.ANTIALIAS))
+            "src/photo/monster1.png").resize((158, 100), Image.LANCZOS))
         self.root.bind("<Key>", self.key_pressed)
 
     def menu(self):
